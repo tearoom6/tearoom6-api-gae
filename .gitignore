@@ -1,0 +1,13 @@
+target
+.DS_Store
+.AppleDouble
+*.mwb
+*.bak
+*.log
+*.log.gz
+*.gz
+
+# IntelliJ
+.idea/workspace.xml
+.idea/tasks.xml
+*.iws

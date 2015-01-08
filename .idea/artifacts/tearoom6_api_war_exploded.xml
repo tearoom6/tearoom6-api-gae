@@ -1,0 +1,32 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="tearoom6-api:war exploded">
+    <output-path>$PROJECT_DIR$/target/tearoom6-api-1.0-SNAPSHOT</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="tearoom6-api" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.google.appengine:appengine-api-1.0-sdk:1.9.17" />
+          <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-server:1.18.3" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.18.3" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-bundle:1.18.3" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:jsr311-api:1.1.1" />
+          <element id="library" level="project" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.2.11" />
+          <element id="library" level="project" name="Maven: org.glassfish.jaxb:jaxb-core:2.2.11" />
+          <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.2.12-b140109.1041" />
+          <element id="library" level="project" name="Maven: org.glassfish.jaxb:txw2:2.2.11" />
+          <element id="library" level="project" name="Maven: com.sun.istack:istack-commons-runtime:2.21" />
+          <element id="library" level="project" name="Maven: org.jvnet.staxex:stax-ex:1.7.7" />
+          <element id="library" level="project" name="Maven: com.sun.xml.fastinfoset:FastInfoset:1.2.13" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.13" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="tearoom6-api/web/Web" />
+    </root>
+  </artifact>
+</component>

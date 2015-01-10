@@ -8,4 +8,8 @@ public class Constants {
     /** レコード登録する際に許容するポイントの閾値 */
     public static final int ALLOWED_MAX_RECORD_POINT = 1000000;
 
+    public static final String PROPERTIES_KEY_SEVIRE_LOG_MSG_BAD_REQ = "severe_log_msg_bad_req";
+
+    public static final String PROPERTIES_KEY_INFO_LOG_MSG_BAD_REQ = "info_log_msg_record_created";
+
 }

@@ -2,9 +2,13 @@ package jp.tearoom6.api.rest.memorytouch;
 
 import com.google.appengine.api.datastore.*;
 import jp.tearoom6.api.rest.MessageDigestAdapter;
+import jp.tearoom6.api.rest.PropertyManager;
 import jp.tearoom6.api.rest.memorytouch.model.RankingRecord;
 
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -20,6 +24,21 @@ import java.util.logging.Logger;
 public class RankingRecordResource {
 
     private static final Logger logger = Logger.getLogger(RankingRecordResource.class.getName());
+
+    @Context
+    private ServletContext context;
+
+    private PropertyManager propeties;
+
+    @PostConstruct
+    public void init() {
+        try {
+            propeties = new PropertyManager(context.getResourceAsStream("/WEB-INF/memorytouch.properties"));
+        } catch (Exception e) {
+            logger.severe(e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     @GET
     @Path("/rankingrecords/{category}")
@@ -62,6 +81,7 @@ public class RankingRecordResource {
                                       @HeaderParam("Api-Token") String token, @HeaderParam("App-Version") String version) {
         try {
             if (rankingRecord.getReqCode() == null || token == null || rankingRecord.getReqCode().isEmpty()) {
+                logger.severe(propeties.getProperty(Constants.PROPERTIES_KEY_SEVIRE_LOG_MSG_BAD_REQ, "", "Not contains ReqCode or Api-Token"));
                 return Response.status(400).build(); // Bad Request
             }
 
@@ -69,11 +89,13 @@ public class RankingRecordResource {
             MessageDigestAdapter mdAdapter = new MessageDigestAdapter("MD5");
             String md5 = mdAdapter.digest(rankingRecord.getReqCode());
             if (!md5.equals(token)) {
+                logger.severe(propeties.getProperty(Constants.PROPERTIES_KEY_SEVIRE_LOG_MSG_BAD_REQ, "", "Incorrect Api-Token"));
                 return Response.status(400).build(); // Bad Request
             }
 
             // 閾値チェック
             if (rankingRecord.getPoint() > Constants.ALLOWED_MAX_RECORD_POINT) {
+                logger.severe(propeties.getProperty(Constants.PROPERTIES_KEY_SEVIRE_LOG_MSG_BAD_REQ, "", "Incredible record point"));
                 return Response.status(400).build(); // Bad Request
             }
 
@@ -87,6 +109,7 @@ public class RankingRecordResource {
             entity.setProperty("point", rankingRecord.getPoint());
             entity.setProperty("createdAt", new Date());
             datastore.put(entity);
+            logger.info(propeties.getProperty(Constants.PROPERTIES_KEY_INFO_LOG_MSG_BAD_REQ, "", rankingRecord.getReqCode(), rankingRecord.getPoint()));
 
             return Response.ok(rankingRecord).build(); // Ok
 

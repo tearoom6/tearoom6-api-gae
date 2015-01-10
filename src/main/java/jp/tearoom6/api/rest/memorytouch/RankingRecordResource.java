@@ -72,6 +72,11 @@ public class RankingRecordResource {
                 return Response.status(400).build(); // Bad Request
             }
 
+            // 閾値チェック
+            if (rankingRecord.getPoint() > Constants.ALLOWED_MAX_RECORD_POINT) {
+                return Response.status(400).build(); // Bad Request
+            }
+
             // Datastoreに保存
             DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
             Key key = KeyFactory.createKey("category", rankingRecord.getCategory());

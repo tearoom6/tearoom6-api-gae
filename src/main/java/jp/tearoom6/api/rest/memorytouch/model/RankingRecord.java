@@ -1,6 +1,7 @@
 package jp.tearoom6.api.rest.memorytouch.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 /**
  * RankingRecord
@@ -9,22 +10,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class RankingRecord {
 
+    private String reqCode;
     private String category;
     private String name;
     private int rank;
     private int point;
+    private Date createdAt;
 
-    public RankingRecord()
-    {
-        // デフォルトコンストラクタはJSONのデシリアライズに必要?
+    public String getReqCode() {
+        return reqCode;
     }
 
-    public RankingRecord(String category, String name, int rank, int point)
-    {
-        this.category = category;
-        this.name = name;
-        this.rank = rank;
-        this.point = point;
+    public void setReqCode(String reqCode) {
+        this.reqCode = reqCode;
     }
 
     public String getCategory() {
@@ -57,5 +55,13 @@ public class RankingRecord {
 
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

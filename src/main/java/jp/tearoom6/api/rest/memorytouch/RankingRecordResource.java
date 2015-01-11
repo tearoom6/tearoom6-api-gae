@@ -45,11 +45,11 @@ public class RankingRecordResource {
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<RankingRecord> getRankingRecords(@PathParam("category") String category, @HeaderParam("App-Version") String version) {
         try {
-            // Datastoreからポイントの降順に最大5件取得
+            // Datastoreからポイントの降順に取得
             DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
             Key key = KeyFactory.createKey("category", category);
             Query query = new Query("RankingRecord", key).addSort("point", Query.SortDirection.DESCENDING);
-            List<Entity> entities = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
+            List<Entity> entities = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(Constants.GET_RANKING_RECORD_COUNT));
 
             List<RankingRecord> records = new ArrayList<>();
             int rank = 1;
